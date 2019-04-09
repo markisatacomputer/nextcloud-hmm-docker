@@ -36,18 +36,19 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
       - proxy-tier
-    depends_on:
-      - omgwtfssl
 
-  omgwtfssl:
-    image: paulczar/omgwtfssl
-    restart: "no"
+  letsencrypt-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
     volumes:
-      - certs:/certs
-    env_file:
-      - omgwtfssl.env
+      - certs:/etc/nginx/certs
+      - vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - proxy-tier
+    depends_on:
+      - proxy
 
 volumes:
   nextcloud:
