@@ -2,13 +2,29 @@ version: '3'
 
 services:
 
+  db:
+    image: postgres:alpine
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data
+    env_file:
+      - db.env
+    environment:
+      - POSTGRES_HOST=localhost
+
   app:
     image: nextcloud:fpm-alpine
     restart: always
     volumes:
       - nextcloud:/var/www/html
+      - config:/usr/src/nextcloud/config
     env_file:
-      - app.env
+      - db.env
+    environment:
+      - POSTGRES_HOST=db
+      - VIRTUAL_HOST=nextcloud.local
+    depends_on:
+      - db
 
   web:
     build: ./web
@@ -17,6 +33,8 @@ services:
       - nextcloud:/var/www/html:ro
     env_file:
       - web.env
+    environment:
+      - VIRTUAL_HOST=nextcloud.local
     depends_on:
       - app
     networks:
@@ -44,16 +62,22 @@ services:
     restart: "no"
     volumes:
       - certs:/certs
-    env_file:
-      - omgwtfssl.env
+    environment:
+      - SSL_SUBJECT=nextcloud.local
+      - CA_SUBJECT=nextcloud.local
+      - SSL_KEY=/certs/nextcloud.local.key
+      - SSL_CSR=/certs/nextcloud.local.csr
+      - SSL_CERT=/certs/nextcloud.local.crt
     networks:
       - proxy-tier
 
 volumes:
+  db:
   nextcloud:
   certs:
   vhost.d:
   html:
+  config:
 
 networks:
   proxy-tier:
