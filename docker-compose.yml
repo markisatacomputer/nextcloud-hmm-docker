@@ -19,7 +19,7 @@ services:
       - nextcloud:/var/www/html
       - config:/usr/src/nextcloud/config
     env_file:
-      - db.env
+      - app.env
     environment:
       - POSTGRES_HOST=db
       - VIRTUAL_HOST=nextcloud.local
