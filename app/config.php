@@ -34,9 +34,9 @@ $CONFIG = array(
     ),
   ),
   //|  STORE
-  'objectstore' => [
+  'objectstore' => array(
     'class' => 'OC\\Files\\ObjectStore\\S3',
-    'arguments' => [
+    'arguments' => array(
       'autocreate' => true,
       'bucket' => $_ENV['S3_BUCKET'],
       'key'    => $_ENV['S3_KEY'],
@@ -46,6 +46,6 @@ $CONFIG = array(
       'use_ssl' => true,
       'region' => $_ENV['S3_REGION'],
       'use_path_style'=>true
-    ],
-  ],
+    ),
+  ),
 );
