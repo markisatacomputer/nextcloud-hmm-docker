@@ -2,6 +2,16 @@ version: '3'
 
 services:
 
+  db:
+    image: postgres:alpine
+    restart: always
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    env_file:
+      - db.env
+    environment:
+      - POSTGRES_HOST=localhost
+
   app:
     build: ./app
     restart: always
@@ -12,6 +22,8 @@ services:
       - ./custom_apps:/usr/src/nextcloud/custom_apps
     env_file:
       - app.env
+    depends_on:
+      - db
 
   web:
     build: ./web
