@@ -1,21 +1,6 @@
 <?php
 
 $CONFIG = array(
-  //|  DOMAINS
-  'trusted_domains' =>
-    array (
-      'nextcloud.local',
-      $_ENV['VIRTUAL_HOST'],
-      '127.*.*.*'
-    ),
-  //|  DB
-  'dbtype' => 'pgsql',
-  'dbhost' => $_ENV['POSTGRES_HOST'],
-  'dbname' => $_ENV['POSTGRES_DATABASE'],
-  'dbuser' => $_ENV['POSTGRES_USER'],
-  'dbpassword' => $_ENV['POSTGRES_PASSWORD'],
-  //|  use token for clients
-  'token_auth_enforced' => true,
   //|  proxy settings
   //'overwriteprotocol' => 'https',
   //'overwrite.cli.url' => 'https://' . $_ENV['VIRTUAL_HOST'] . '/',
