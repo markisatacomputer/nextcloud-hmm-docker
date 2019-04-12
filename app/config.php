@@ -22,15 +22,13 @@ $CONFIG = array(
   'objectstore' => array(
     'class' => 'OC\\Files\\ObjectStore\\S3',
     'arguments' => array(
-      'autocreate' => true,
+      'autocreate' => false,
       'bucket' => $_ENV['S3_BUCKET'],
       'key'    => $_ENV['S3_KEY'],
       'secret' => $_ENV['S3_SECRET'],
       'hostname' => $_ENV['S3_HOSTNAME'],
-      'port' => $_ENV['S3_PORT'],
       'use_ssl' => true,
       'region' => $_ENV['S3_REGION'],
-      'use_path_style'=>true
     ),
   ),
 );
