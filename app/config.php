@@ -2,6 +2,8 @@
 
 $CONFIG = array(
   //|  proxy settings
+  'trusted_proxies' => explode(' ',$_ENV['NEXTCLOUD_TRUSTED_PROXIES']),
+  //'overwritehost' => $_ENV['VIRTUAL_HOST'],
   //'overwriteprotocol' => 'https',
   //'overwrite.cli.url' => 'https://' . $_ENV['VIRTUAL_HOST'] . '/',
   //'htaccess.RewriteBase' => '/',
