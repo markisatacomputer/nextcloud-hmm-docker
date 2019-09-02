@@ -37,6 +37,4 @@ RUN set -ex; \
     apk del .build-deps \
 ;
 
-COPY config.php /usr/src/nextcloud/config/config.php
-
 ENV NEXTCLOUD_UPDATE=1
