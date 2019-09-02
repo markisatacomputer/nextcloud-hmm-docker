@@ -26,7 +26,7 @@ services:
       - db
 
   web:
-    build: ./web
+    image: nginx:alpine
     restart: always
     volumes:
       - nextcloud:/var/www/html:ro
