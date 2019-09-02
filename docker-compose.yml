@@ -38,24 +38,9 @@ services:
     depends_on:
       - app
     networks:
-      - proxy-tier
+      - web
       - default
 
-  proxy:
-    build: ./proxy
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ../ssl:/etc/nginx/certs:ro
-      - vhost.d:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-      - proxy-tier
-    env_file:
-      - proxy.env
 
 volumes:
   nextcloud:
@@ -64,4 +49,5 @@ volumes:
   config:
 
 networks:
-  proxy-tier:
+  web:
+    external: true
