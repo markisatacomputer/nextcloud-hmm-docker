@@ -1,3 +1,9 @@
 *.env
-data
-ssl
+#  Here's where all the folders that are mounted to the app container live
+appdata
+#  Here's where the db folder lives
+db
+#  Here's where we keep backups
+backup
+#  Here's where the certs are
+web/ssl
