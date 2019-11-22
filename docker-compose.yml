@@ -57,7 +57,15 @@ services:
     networks:
       - web
       - default
-
+    labels:
+      - "traefik.backend=web"
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:store.homemademess.com,stro.homemademess.com"
+      - "traefik.frontend.entryPoints=https"
+      - "traefik.frontend.passHostHeader=true"
+      - "traefik.port=443"
+      - "traefik.protocol=https"
 
 volumes:
   db:
