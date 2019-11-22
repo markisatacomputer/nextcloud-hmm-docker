@@ -6,7 +6,7 @@ services:
     image: postgres:alpine
     restart: always
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./db:/var/lib/postgresql/data
     env_file:
       - db.env
     environment:
@@ -29,13 +29,13 @@ services:
   app:
     build: ./app
     restart: always
-    volumes:
-      - nextcloud:/var/www/html
-      - ./app/config:/usr/src/nextcloud/config
-      - ./data:/usr/src/nextcloud/data
-      - ./custom_apps:/usr/src/nextcloud/custom_apps
     env_file:
       - app.env
+    volumes:
+      - nextcloud:/var/www/html
+      - ./appdata/config:/var/www/html/config
+      - ./appdata/custom_apps:/var/www/html/custom_apps
+      - ./appdata/data:/var/www/html/data
     depends_on:
       - db
       - redis
@@ -58,10 +58,9 @@ services:
 
 
 volumes:
+  db:
+  redisdata:
   nextcloud:
-  vhost.d:
-  html:
-  config:
 
 networks:
   web:
