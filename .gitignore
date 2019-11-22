@@ -7,3 +7,5 @@ db
 backup
 #  Here's where the certs are
 web/ssl
+#  Here's where the redis data is
+redisdata
