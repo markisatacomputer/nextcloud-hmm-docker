@@ -12,6 +12,20 @@ services:
     environment:
       - POSTGRES_HOST=localhost
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8585:8080
+    depends_on:
+      - db
+
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - redisdata:/data
+
   app:
     build: ./app
     restart: always
@@ -24,6 +38,7 @@ services:
       - app.env
     depends_on:
       - db
+      - redis
 
   web:
     image: nginx:alpine
