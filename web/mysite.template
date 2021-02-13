@@ -2,7 +2,7 @@ upstream php-handler {
     # The keepalive parameter sets the maximum number of idle keepalive connections
     # to upstream servers that are preserved in the cache of each worker process. When
     # this number is exceeded, the least recently used connections are closed.
-    keepalive 32;
+    keepalive 64;
 
     server app:9000;
 }
