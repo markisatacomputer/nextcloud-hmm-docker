@@ -11,6 +11,8 @@ services:
       - db.env
     environment:
       - POSTGRES_HOST=localhost
+    labels:
+      - "traefik.enable=false"
 
   adminer:
     image: adminer
@@ -19,12 +21,16 @@ services:
       - 8585:8080
     depends_on:
       - db
+    labels:
+      - "traefik.enable=false"
 
   redis:
     image: redis:alpine
     restart: always
     volumes:
       - redisdata:/data
+    labels:
+      - "traefik.enable=false"
 
   app:
     build: ./app
